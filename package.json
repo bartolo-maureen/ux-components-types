@@ -1,5 +1,5 @@
 {
   "name": "ux-components-types",
   "version": "1.0.0",
-  "types": "ux-components-types.d.ts"
+  "types": "index.d.ts"
 }

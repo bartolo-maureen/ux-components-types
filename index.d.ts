@@ -2,7 +2,7 @@
 /// < reference path="ValidationError.d.ts" />
 /// < reference path="http2.d.ts" />
 
-declare module 'ux-components-types' {
+declare module 'index' {
     export class Weavr {
         init(uiKey: string, options?: SecureClientOptions): WeavrComponents;
         setUserToken(authToken?: string, resolve?: () => void, reject?: (err?: any) => {}): Promise<any>;
