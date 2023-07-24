@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UX Components V2 Testing page</title>
+<!--    <script src="https://js.weavr.io/qa/weavr-client-v2.js"></script>-->
+    <script src="http://localhost:8080/weavr-client-v2.js"></script>
+    <script src="./initialise.js" type="text/javascript"></script>
+    <style>
+        body > div + div {
+            width: 100%;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid black;
+        }
+        label, input {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form onSubmit="inputPasswordSubmit(); return false;">
+            <label>Username</label>
+            <input id="username"/>
+            <div>
+                <label>Password</label>
+                <div id="input-password"></div>
+            </div>
+
+            <input type="submit" value="Login">
+        </form>
+        <div id="inputPasswordResponse"></div>
+    </div>
+
+
+    <div>
+        <form onSubmit="inputPasscodeSubmit(); return false;">
+            <label>Passcode</label>
+            <div id="input-passcode"></div>
+
+            <input type="submit" value="Login">
+        </form>
+        <div id="inputPasscodeResponse"></div>
+    </div>
+
+    <div>
+        <form onSubmit="inputPasswordChangeSubmit(); return false;">
+            <label>Password Change</label>
+            <div id="input-password-old"></div>
+            <div id="input-password-new"></div>
+
+            <input type="submit" value="Login">
+        </form>
+        <div id="inputPasswordChangeResponse"></div>
+    </div>
+
+    <div>
+        <form onSubmit="inputDelayedPassSubmit(); return false;">
+            <label>Password Delayed</label>
+            <div id="input-password-delayed"></div>
+
+            <input type="submit" value="Login">
+        </form>
+        <button id="delayedPassword">Init Password</button>
+        <div id="inputPasswordDelayedResponse"></div>
+    </div>
+
+    <div>
+        <form onSubmit="inputPasswordConfirmSubmit(); return false;">
+            <label>Password + Passcode Confirmation</label>
+            <div id="input-password-orig"></div>
+            <div id="input-password-confirm"></div>
+
+            <div id="input-passcode-orig"></div>
+            <div id="input-passcode-confirm"></div>
+
+            <input type="submit" value="Confirm">
+        </form>
+        <div id="inputPasswordConfirmResponse"></div>
+    </div>
+
+    <div>
+        <form onSubmit="inputPasswordConfirmFilteredSubmit(); return false;">
+            <label>Filtered Confirmation</label>
+            <div id="input-filtered-password-orig"></div>
+            <div id="input-filtered-password-confirm"></div>
+            <div id="input-filtered-password-other"></div>
+
+            <input type="submit" value="Confirm">
+        </form>
+        <button onclick="inputPasswordConfirmFilteredTokenize()">Tokenize all</button>
+        <div id="inputPasswordConfirmFilteredResponse"></div>
+        <div id="inputPasswordConfirmFilteredTokenizeResponse"></div>
+    </div>
+
+    <div>
+        <form onSubmit="inputPinTokenizeSubmit(); return false;">
+            <label>Pin Tokenize</label>
+            <div id="input-pin"></div>
+
+            <input type="submit" value="Tokenize">
+        </form>
+        <div id="inputPinResponse"></div>
+    </div>
+
+    <div>
+        <form onSubmit="displayCardNumberSubmit(); return false;">
+            <label>Display Card Number</label>
+            <input id="i-cardNumber" placeholder="Tokenized card number"/>
+            Card number: <span id="display-cardNumber"></span>
+
+            <input type="submit" value="Display">
+        </form>
+    </div>
+
+    <div>
+        <form onSubmit="displayCardCvvSubmit(); return false;">
+            <label>Display Card CVV</label>
+            <input id="i-cardCvv" placeholder="Tokenized cvv"/>
+            Card CVV: <span id="display-cardCvv"></span>
+
+            <input type="submit" value="Display">
+        </form>
+    </div>
+
+    <div>
+        <form onSubmit="displayCardPinSubmit(); return false;">
+            <label>Display Card Pin</label>
+            <input id="i-cardPin" placeholder="Tokenized card pin"/>
+            Card PIN: <span id="display-cardPin"></span>
+
+            <input type="submit" value="Display">
+        </form>
+    </div>
+
+    <div>
+        <form onSubmit="captureConsumerKycInit(); return false;">
+            <label>Consumer KYC</label>
+            <input id="ref-ckyc" placeholder="Reference id"/>
+            <input type="submit" value="Display">
+        </form>
+        <div id="div-ckyc"></div>
+    </div>
+
+    <div>
+        <form onSubmit="captureBeneficiaryKycInit(); return false;">
+            <label>Beneficiary KYC</label>
+            <input id="ref-bkyc" placeholder="Reference id"/>
+            <input type="submit" value="Display">
+        </form>
+        <div id="div-bkyc"></div>
+    </div>
+
+    <div>
+        <form onSubmit="captureKybInit(); return false;">
+            <label>Corporate KYB</label>
+            <input id="ref-kyb" placeholder="Reference id"/>
+            <input type="submit" value="Display">
+        </form>
+        <div id="div-kyb"></div>
+    </div>
+
+    <script src="./inputPassword.js" type="text/javascript"></script>
+    <script src="./inputPasscode.js" type="text/javascript"></script>
+    <script src="./inputPasswordChange.js" type="text/javascript"></script>
+    <script src="./inputDelayedPassword.js" type="text/javascript"></script>
+    <script src="./inputPasswordConfirmAll.js" type="text/javascript"></script>
+    <script src="./inputPasswordConfirmFiltered.js" type="text/javascript"></script>
+    <script src="./inputCardPin.js" type="text/javascript"></script>
+    <script src="./displayCardNumber.js" type="text/javascript"></script>
+    <script src="./displayCardCvv.js" type="text/javascript"></script>
+    <script src="./displayCardPin.js" type="text/javascript"></script>
+    <script src="./captureBeneficiaryKyc.js" type="text/javascript"></script>
+    <script src="./captureConsumerKyc.js" type="text/javascript"></script>
+    <script src="./captureKyb.js" type="text/javascript"></script>
+</body>
+</html>

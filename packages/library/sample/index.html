@@ -1,0 +1,2840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Secure Components - Weavr</title>
+    <!-- <script src="https://js.weavr.io/secure/weavr-client-v2.js" charset="utf-8"></script> -->
+    <!-- <script src="https://js.weavr.io/sandbox/weavr-client-v2.js" charset="utf-8"></script>-->
+
+    <!-- For QA testing use the following script -->
+<!--        <script src='https://js.weavr.io/qa/weavr-client-v2.js' charset='utf-8'></script>-->
+
+    <!-- For local Build testing use the following script -->
+<!--        <script src='http://localhost:8080/weavr-client-v2.js' charset='utf-8'></script>-->
+
+    <!-- For local development use the following script -->
+        <script
+            src='http://localhost:8080/client/client.ts'
+            type='module'
+            crossorigin='anonymous'
+            charset='utf-8'>
+        </script>
+
+    <link rel="stylesheet" href="./style/style.css">
+    <link href="prism/prism.css" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <div class="documentation p-2">
+        <sub>Version</sub>
+        <h1>UI Library Overview</h1>
+
+        <section id="language-select" class="section_main">
+            <h3>Select a language example</h3>
+
+            <p>Please select your favorite Web language:</p>
+            <input type="radio" id="vanilla" name="language" value="example-vanilla">
+            <label for="vanilla">Vanilla JS + HTML</label><br>
+
+            <input type="radio" id="react" name="language" value="example-react">
+            <label for="react">React</label><br>
+
+            <input type="radio" id="angular" name="language" value="example-angular">
+            <label for="angular">Angular</label><br>
+        </section>
+
+        <section id="overview" class="section_main">
+            <p>You can use Weavr’s UI library to build secure payment flows for your customers.</p>
+
+            <div class="documentation__tip">
+                <div class="documentation__tip_header">
+                    Tip
+                </div>
+                <p>
+                    By transmitting and receiving PCI-sensitive data in tokenised form, you qualify for the lowest level of PCI compliance.
+                </p>
+            </div>
+
+            <h2>Overview</h2>
+
+            <p>
+                Weavr’s JavaScript UI library lets you capture and show sensitive information using customisable UI components without this information touching your servers.
+                This ensures that you qualify for the lowest level of PCI compliance.
+            </p>
+
+            <p>
+                The UI library offers the following components:
+            </p>
+
+            <ul>
+                <li>
+                    <strong>Password UI component</strong> to collect your customers’ passwords to access their financial data
+                </li>
+                <li>
+                    <strong>Passcode UI component</strong> to collect your customers’ passcodes to access their financial data
+                </li>
+                <li><strong>Card PIN UI component</strong> to collect your customers’ defined physical card PINs</li>
+
+                <li><strong>Card number UI component</strong> to show the full 16-digit card number to your customers
+                </li>
+                <li>
+                    <strong>CVV UI component</strong> to show the 3-digit number that is needed to make online purchases using cards
+                </li>
+                <li>
+                    <strong>Show Card PIN UI component</strong> to show the 4-digit PIN number needed to make in-person purchases using cards
+                </li>
+
+                <li><strong>KYB UI component</strong> to collect due diligence information from your corporate customers
+                </li>
+                <li>
+                    <strong>Director KYC UI component</strong> to collect due diligence information from corporate directors/representatives
+                </li>
+                <li><strong>KYC UI component</strong> to collect due diligence information from your consumers</li>
+            </ul>
+
+            <section>
+                <h2>Set up the Library</h2>
+
+                <p>If you want to embed a Weavr UI component on a page, you must include the library in the header section of the page.</p>
+
+                <div class="example-vanilla code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- For the Sandbox environment --&gt;
+                                    &lt;script src="https://js.weavr.io/qa/weavr-client-v2.js" charset="utf-8">&lt;/script&gt;
+
+                                    &lt;!-- For the Live environment --&gt;
+                                    &lt;script src="https://js.weavr.io/secure/weavr-client-v2.js" charset="utf-8"&gt;&lt;/script&gt;
+                                </code>
+                            </pre>
+                </div>
+
+                <div class="example-react">
+                    <p>
+                        Inside the <code>public/index.html</code> file
+                        include the weavr client script within your body like below. This will make the weavr
+                        components available throughout your project
+                    </p>
+                    <div class="code-block language-html">
+                                <pre>
+                                    <code class="language-html">
+                                        &lt;body>
+                                            &lt;!-- For the Sandbox environment add --&gt;
+                                            &lt;script src="https://js.weavr.io/qa/weavr-client-v2.js" charset="utf-8"&gt;&lt;/script&gt;
+
+                                            &lt;!-- For the Live environment add --&gt;
+                                            &lt;script src="https://js.weavr.io/secure/weavr-client-v2.js" charset="utf-8"&gt;&lt;/script&gt;
+
+                                            &lt;noscript>You need to enable JavaScript to run this app.&lt;/noscript>
+                                            &lt;div id="root">&lt;/div>
+                                            &lt;!--
+                                              This HTML file is a template.
+                                              If you open it directly in the browser, you will see an empty page.
+
+                                              You can add webfonts, meta tags, or analytics to this file.
+                                              The build step will place the bundled scripts into the &lt;body> tag.
+
+                                              To begin the development, run `npm start` or `yarn start`.
+                                              To create a production bundle, use `npm run build` or `yarn build`.
+                                            -->
+                                        &lt;/body>
+                                    </code>
+                                </pre>
+                    </div>
+                </div>
+
+                <div class="example-angular">
+                    <p>
+                        Inside the <code>src/index.html</code> file
+                        include the weavr client script asynchronously within your header like below. This will
+                        make the weavr components available throughout your project
+                    </p>
+
+                    <div class="code-block language-html">
+                                <pre>
+                                    <code class="language-html">
+                                        &lt;head>
+                                            ...
+
+                                            &lt;!-- For the Sandbox environment --&gt;
+                                            &lt;script src="https://js.weavr.io/qa/weavr-client-v2.js" type="text/javascript" async charset="utf-8">&lt;/script>
+
+                                            &lt;!-- For the Live environment --&gt;
+                                            &lt;script src="https://js.weavr.io/secure/weavr-client-v2.js" type="text/javascript" async charset="utf-8">&lt;/script>
+                                        &lt;/head>
+                                    </code>
+                                </pre>
+                    </div>
+                </div>
+
+                <p>
+                    Next, you must initialise the library by providing your UI key and calling the
+                    <code>init</code> method. (You can find your UI key on the API Settings screen
+                    in the Multi Portal). This will return an instance of the WeavrComponents class.
+                    You can only have a single instance of this class, trying to initialise it again
+                    would result in an error.
+                </p>
+
+                <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    const weavrComponents = window.weavr.init('{{ui_key}}')
+                                </code>
+                            </pre>
+                </div>
+
+                <h2>Setting the User Token (previously called associate)</h2>
+                <p>
+                    Once you generate a tokenised password using our password component(LINK),
+                    the user is able login and get an authorisation token. (You can get your User authorisation
+                    token by logging in using API <code>api/auth/login_with_password</code> (LINK Multi v3 Login Api)).
+                    This token is then passed to the <code>setUserToken</code> function, to authorize
+                    future requests.
+                </p>
+
+                <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    weavrComponents.setUserToken('Bearer ' + {{user_token}})
+                                        .then(() =&gt; {
+                                            // User token is set and secure components can be created and mounted
+                                        })
+                                        .catch((err) =&gt; {
+                                            // Error while setting user token. Check 'err' for more info
+                                        })
+                                </code>
+                            </pre>
+                </div>
+            </section>
+
+            <h2>Customise the look and feel</h2>
+
+            <p>
+                You can customise the look and feel of Weavr UI components to match your application.
+            </p>
+
+            <h3>Fonts</h3>
+            <p>You can specify the font(s) to be loaded when initialising the Weavr UI Components library.</p>
+
+            <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const weavrComponents = window.weavr.init(
+                                    '{{ui_key}}',
+                                    {
+                                        fonts: [
+                                            {
+                                                family: '{{Font Family Name}}',
+                                                src: "url('{{Font URL to be imported}}')",
+                                                /** Below are optional **/
+                                                style: ''
+                                                unicodeRange: ''
+                                                weight: ''
+                                                variant: ''
+                                                stretch: ''
+                                            },
+                                            {
+                                                family: '{{Font Family Name}}'
+                                                src:'data:font/opentype;base64,{{base64 data format of font}}'
+                                            },
+                                            {
+                                                cssSrc: '{{Font URL content to be retrieved}}'
+                                            }
+                                        ]
+                                    }
+                                )
+                            </code>
+                        </pre>
+            </div>
+            <h3>Styles</h3>
+
+            <p>You can specify your custom element style via the
+                <code>style</code> parameter when initialising a UI component.</p>
+            <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const passwordComponent = WeavrComponents.capture.password(
+                                    '{{ Component Name }}',
+                                    {
+                                        placeholder: 'Password',
+                                        style: {
+                                            base: {
+                                                fontSize: '24px',
+                                                fontFamily: 'Fuggles',
+                                                '::placeholder': {
+                                                    fontSize: '12px',
+                                                    fontFamily: 'Zen Loop'
+                                                }
+                                            }
+                                        }
+                                    }
+                                )
+                            </code>
+                        </pre>
+            </div>
+            <h4>States</h4>
+            <p>
+                You can also define different styles for different states that the component is in. The following are the supported states:
+            <ul>
+                <li><strong>base</strong> - the default state for all components</li>
+                <li>
+                    <strong>empty</strong> - applicable to input type components, components will transition to this state whenever the input is cleared
+                </li>
+                <li>
+                    <strong>valid</strong> - applicable to input type components, components will transition to this state whenever the user input is valid
+                </li>
+                <li>
+                    <strong>invalid</strong> - applicable to input type components, components will transition to this state whenever the user input is invalid
+                </li>
+            </ul>
+            </p>
+
+            <h4>Pseudo-classes</h4>
+
+            <p>
+                You can further customise the look and feel of the UI components using pseudo-classes to represent different actions that are happening on the UI component.
+                The following options are supported:
+            <ul>
+                <li>:hover</li>
+                <li>:active</li>
+                <li>:focus</li>
+                <li>:disabled</li>
+                <li>::placeholder</li>
+                <li>::selection</li>
+                <li>:-webkit-autofill</li>
+            </ul>
+            </p>
+
+            <h2>Register for events</h2>
+
+            <p>
+                There are various events that are triggered by the components that can be useful to listen for.
+            </p>
+            <p>Below events are triggered by both Input and Display Components:</p>
+            <ul>
+                <li><strong>ready</strong> - triggered when component has been initialised</li>
+                <li><strong>dimensions</strong> - triggered when the input element dimension changes</li>
+                <li><strong>change</strong> - triggered when the component's state changes</li>
+                <li><strong>error</strong> - triggered when the component's state changes</li>
+            </ul>
+            <p>Below events are triggered by both Display Components:</p>
+            <ul>
+                <li>
+                    <strong>error</strong> - triggered when an error is thrown during detokenisation. If not handled, an error is thrown
+                </li>
+            </ul>
+            <p>These are only triggered by Input components:</p>
+            <ul>
+                <li><strong>focus</strong> - triggered when input element is in focus</li>
+                <li><strong>blur</strong> - triggered when input element loses focus</li>
+                <li>
+                    <strong>keyup</strong> - triggered on key up, providing a key parameter representing
+                    the key that triggered the event. The keys triggering the event are either 'Enter' or 'Escape'
+                </li>
+                <li>
+                    <strong>submit</strong> - triggered on 'Enter' key up, or other submission buttons
+                </li>
+                <li>
+                    <strong>redirectfocus</strong> - called when focus is leaving the current input elemnent, to the next/previous element.
+                    Fires with an event speciying if the <code>focusDirection</code> is <code>previous</code> or
+                    <code>next</code>
+                </li>
+                <li><strong>autofill</strong> - triggered when input has been autofilled</li>
+                <li><strong>autofill-cleared</strong> - triggered when autofilled content has been cleared</li>
+            </ul>
+            <p>This is only triggered by the password component</p>
+            <ul>
+                <li>
+                    <strong>strength</strong> - triggered when strength level of the password changes, more on this in the password component
+                </li>
+            </ul>
+
+            <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    passwordComponent.on('blur', (e) =&gt; {
+                                        // Input lost focus
+                                    })
+
+                                    passwordComponent.on('submit', (e) =&gt; {
+                                        // Submission event triggered
+                                    })
+                                </code>
+                            </pre>
+            </div>
+            </p>
+        </section>
+
+        <section id="capture-password" class="section_main">
+            <h1>Password UI Component</h1>
+
+            <p>Before your customers can access their
+                <a href="https://docs.weavr.io/docs/multi/instruments/cards/multi-cards-overview">cards</a>
+                and
+                <a href="https://docs.weavr.io/docs/multi/instruments/accounts/multi-accounts-overview">managed accounts</a>,
+                they must be onboarded and authenticated on the Weavr platform.
+                You can find more information on how to onboard your customers
+                <a href="https://docs.weavr.io//docs/multi/identities/multi-identities-overview">here</a>.
+            </p>
+
+            <div class="documentation__tip">
+                <div class="documentation__tip_header">
+                    Info
+                </div>
+                <p>
+                    If you already require your customers to authenticate to use your application,
+                    you can authenticate your customers with Weavr using a passcode instead of a password.
+                    Learn more in the passcode UI component guide.
+                </p>
+            </div>
+
+            <h2>Embedding the Password Component</h2>
+
+            <p>
+                The <em>Password</em> UI component lets you collect your customer's
+                password securely and converts it into a token, which you can safely send to Weavr using the API.
+            </p>
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Define a form in which you will ask your customer to input their password --&gt;
+                                    &lt;form onSubmit="onSubmit(); return false;"&gt;
+                                        &lt;!-- Normal input to accept the user name--&gt;
+                                        Username: &lt;input type="input" name="user" /&gt;
+                                        &lt;!-- Div to be replaced with the password component --&gt;
+                                        Password: &lt;div id="password"&gt;&lt;/div&gt;
+
+                                        &lt;input type="submit" value="Login" /&gt;
+                                    &lt;/form&gt;
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    const passwordComponent = WeavrComponents.capture.password(
+                                        '{{ component name }}',
+                                        {
+                                            placeholder: 'Password',
+                                            maxlength: 20,
+                                            // strengthCheck: true, // Shows strength checker with default styling
+                                            strengthCheck: { // optional (defaults to false) - all object values are also optional
+                                                borderRadius: '2px',
+                                                border: '1px solid black',
+                                                backgroundColor: 'white',
+                                                weakColor: 'red',
+                                                mediumColor: 'orange',
+                                                strongColor: 'green',
+                                                classNames: 'class-example' // Add custom class here to customise strength bar
+                                                // hideText: true
+                                            }
+                                        }
+                                    )
+
+                                    passwordComponent.mount('#password')
+
+                                    function onSubmit() {
+                                        passwordComponent.createToken()
+                                            .then(res =&gt; {
+                                                // Successfully created token
+                                                console.log(res)
+
+                                                // Outputs:
+                                                // {
+                                                //   "tokens": {
+                                                //     "{{ component name }}": "{{ token }}"
+                                                //   }
+                                                // }
+                                            })
+                                            .catch(e =&gt; {
+                                                // Error while creating the token
+                                            })
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <p>
+                    In this example we create a <code>CapturePassword</code> react component, using a JSX form
+                    to display a password input, passing in the initialised Weavr Components instance as a prop.
+                    This component can then be added wherever to user wants to add the Weavr Password Component.
+                </p>
+                <p>
+                    The result of the query is then displayed in a div below the password component
+                </p>
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    class CapturePassword extends React.Component {
+                                        // Pass Weavr Component instance as a prop called weavrComponents
+                                        passwordComponent = null
+
+                                        constructor(props) {
+                                            super(props);
+
+                                            this.state = {
+                                                response: ''
+                                            }
+                                        }
+
+                                        componentDidMount() {
+                                            const weavrComponents = this.props.weavrComponents;
+                                            this.passwordComponent = weavrComponents.capture.password(
+                                                'password',
+                                                {
+                                                    placeholder: 'Password',
+                                                    maxlength: 20,
+                                                    // strengthCheck: true, // Shows strength checker with default styling
+                                                    strengthCheck: { // optional (defaults to false) - all object values are also optional
+                                                        borderRadius: '2px',
+                                                        border: '1px solid black',
+                                                        backgroundColor: 'white',
+                                                        weakColor: 'red',
+                                                        mediumColor: 'orange',
+                                                        strongColor: 'green',
+                                                        // hideText: true
+                                                    }
+                                                }
+                                            )
+
+                                            this.passwordComponent.mount('#password')
+                                        }
+
+                                        onSubmit(ev) {
+                                            ev.preventDefault();
+
+                                            this.passwordComponent.createToken()
+                                                .then(res => {
+                                                    // Show the json response as a prettified string
+                                                    this.setState({
+                                                        response: JSON.stringify(res, null, 2)
+                                                    })
+                                                })
+                                                .catch(e => {
+                                                    // Error while creating the token - show as response
+                                                    this.setState({
+                                                        response: e
+                                                    })
+                                                })
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2>Password UI Component&lt;/h2>
+
+                                                    &lt;form id="form" onSubmit={(ev) => this.onSubmit(ev)}>
+                                                        &lt;div id="password">&lt;/div>
+
+                                                        &lt;input type="submit" value="Submit"/>
+                                                    &lt;/form>
+
+                                                    &lt;div className="weavr-response">
+                                                        &lt;div>Response&lt;/div>
+                                                        &lt;textarea id="response" readOnly rows="8" value={this.state.response}>&lt;/textarea>
+                                                    &lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <p>
+                    In this example we create the <code>app-capture-password</code> angular component.
+                    We pass it the initialised Weavr Components instance as an input. This component can then
+                    be added wherever the user wants to add the Weavr Password Component.
+                </p>
+                <p>
+                    The result of the query is then displayed in a div below the password component
+                </p>
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;div>
+                                        &lt;h2>Password UI Component&lt;/h2>
+
+                                        &lt;div id="input_capture_password">&lt;/div>
+                                        &lt;input type="submit" value="Submit" (click)="onSubmitPassword()"/>
+
+                                        &lt;div className="weavr-response">
+                                            &lt;div>Response&lt;/div>
+                                            &lt;textarea readOnly rows="5" [value]="response">&lt;/textarea>
+                                        &lt;/div>
+                                    &lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input, OnInit } from '@angular/core'
+
+                                    @Component({
+                                        selector: 'app-capture-password',
+                                        templateUrl: './capture-password.component.html',
+                                        styleUrls: ['./capture-password.component.css']
+                                    })
+                                    export class CapturePasswordComponent implements OnInit {
+                                        @Input() weavrComponents!: any;
+
+                                        response: string = ''
+                                        passwordComponent: any;
+
+                                        constructor(
+                                        ) { }
+
+                                        ngOnInit() {
+                                            this.passwordComponent = this.weavrComponents.capture.password(
+                                                'password',
+                                                {
+                                                    placeholder: 'Password',
+                                                    maxlength: 20,
+                                                    // strengthCheck: true, // Shows strength checker with default styling
+                                                    strengthCheck: { // optional (defaults to false) - all object values are also optional
+                                                        borderRadius: '2px',
+                                                        border: '1px solid black',
+                                                        backgroundColor: 'white',
+                                                        weakColor: 'red',
+                                                        mediumColor: 'orange',
+                                                        strongColor: 'green',
+                                                        // hideText: true
+                                                    }
+                                                }
+                                            )
+
+                                            this.passwordComponent.mount('#input_capture_password')
+                                        }
+
+                                        onPasswordSubmit() {
+                                            this.passwordComponent.createToken()
+                                                .then((res: any) => {
+                                                    this.response = JSON.stringify(res, null, 2)
+                                                })
+                                                .catch((e:any) => {
+                                                    this.response = e.toString()
+                                                })
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+
+            <h2>Authenticate the user</h2>
+            <p>
+                Now that you have the tokenised password, you can authenticate the user using the tokenised password.
+                Pass the username and tokenised password to the <code>/login_with_password</code> API call,
+                and get an authentication token in the reponse, to be used in subsequent API calls
+            </p>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/loginWithPassword"
+                class="endpoint-link"
+                target="_blank">
+                /login_with_password
+            </a>
+
+            <h2>Confirming passwords or passcodes match</h2>
+
+            <p>
+                You can easily confirm if two password or passcode inputs match by creating multiple password
+                components in the same form and calling the match function which will return a promise.
+                If they match the promise is resolved, else it is rejected.
+            </p>
+
+            <div>
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Define a form in which you will ask your customer to input their new password --&gt;
+                                    &lt;form onSubmit="onSubmit(); return false;"&gt;
+
+                                        Password: &lt;div id="password"&gt;&lt;/div&gt;
+
+                                        Confirm Password: &lt;div id="confirmPassword"&gt;&lt;/div&gt;
+
+                                        Extra Confirm Password: &lt;div id="extraConfirmPassword"&gt;&lt;/div&gt;
+
+                                        &lt;input type="submit" value="Submit" /&gt;
+                                    &lt;/form&gt;
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const form = WeavrComponents.form()
+                                const passwordComponent = form.password(
+                                    'primaryPassword', // component name
+                                    {
+                                        placeholder: 'Password'
+                                    }
+                                )
+                                const confirmPasswordComponent = form.password(
+                                    'confirmPassword',
+                                    {
+                                        placeholder: 'Confirm password'
+                                    }
+                                )
+                                const extraConfirmPasswordComponent = form.password(
+                                    'extraConfirmPassword',
+                                    {
+                                        placeholder: 'Extra Confirm password'
+                                    }
+                                )
+
+                                passwordComponent.mount('#password')
+                                confirmPasswordComponent.mount('#confirmPassword')
+                                extraConfirmPasswordComponent.mount('#extraConfirmPassword')
+
+                                function onSubmit() {
+                                    // Match all password inputs
+                                    form.match()
+                                        .then(() =&gt; {
+                                            // All three password inputs have matched
+                                        })
+                                        .catch(e =&gt; {
+                                            // Mismatched password, confirmation password and extra confirmation password
+                                            // or other error while creating the tokens
+                                            console.log(e.message)
+                                        })
+
+                                    // Only match the first two password inputs
+                                    form.match(['primaryPassword', 'confirmPassword'])
+                                        .then(() =&gt; {
+                                            // The primary and confirm passwords have matched, the extra confirm password input is ignored
+                                        })
+                                        .catch(e =&gt; {
+                                            // Mismatched password and confirmation password
+                                            // or other error while creating the tokens
+                                            console.log(e.message)
+                                        })
+                                }
+                            </code>
+                        </pre>
+                </div>
+            </div>
+
+            <h2>Creating a change password form</h2>
+
+            <p>
+                If you want to change a password, you will need to tokenise the old and new password.
+                This can be easily done using 2 password components in the same secure form
+            </p>
+
+            <div>
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Define a form in which you will ask your customer to input their new password --&gt;
+                                    &lt;form onSubmit="onSubmit(); return false;"&gt;
+
+                                        Old Password: &lt;div id="oldPassword"&gt;&lt;/div&gt;
+
+                                        New Password: &lt;div id="newPassword"&gt;&lt;/div&gt;
+
+                                        &lt;input type="submit" value="Submit" /&gt;
+                                    &lt;/form&gt;
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const form = WeavrComponents.form()
+                                const oldPasswordComponent = form.password(
+                                    '{{ old password component name }}',
+                                    {
+                                        placeholder: 'Old Password'
+                                    }
+                                )
+                                const newPasswordComponent = form.password(
+                                    '{{ new password component name }}',
+                                    {
+                                        placeholder: 'New password'
+                                    }
+                                )
+
+                                oldPasswordComponent.mount('#oldPassword')
+                                newPasswordComponent.mount('#newPassword')
+
+                                function onSubmit() {
+                                    form.createToken()
+                                        .then(res =&gt; {
+                                            // Successfully created token
+                                            console.log(res)
+
+                                            // Outputs:
+                                            // {
+                                            //   "tokens": {
+                                            //     "{{ old password component name }}": "{{ token1 }}",
+                                            //     "{{ new password component name }}": "{{ token2 }}"
+                                            //   }
+                                            // }
+                                        })
+                                        .catch(e =&gt; {
+                                            // Error while creating the tokens
+                                        })
+                                }
+                            </code>
+                        </pre>
+                </div>
+            </div>
+
+            <h2>Using the strength checker</h2>
+
+            <p>
+                When creating a password component, you are also able to enable the strength checker UI,
+                or listen for the <b>strength</b> event, which emits the below possible 4 states:
+            <ul>
+                <li>Very Weak: { id: 0, value: 'Very Weak' }</li>
+                <li>Weak: { id: 1, value: 'Weak' }</li>
+                <li>Medium: { id: 2, value: 'Medium' }</li>
+                <li>Strong: { id: 3, value: 'Strong' }</li>
+            </ul>
+            </p>
+
+            <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const passwordComponent = WeavrComponents.capture.password(
+                                    '{{ component name }}',
+                                    {
+                                        placeholder: 'Password',
+                                        maxlength: 20,
+                                        // strengthCheck: true, // Shows strength checker with default styling
+                                        strengthCheck: { // optional (defaults to false) - all object values are also optional
+                                            borderRadius: '2px',
+                                            border: '1px solid black',
+                                            backgroundColor: 'white',
+                                            weakColor: 'red',
+                                            mediumColor: 'orange',
+                                            strongColor: 'green',
+                                            // hideText: true
+                                        }
+                                    }
+                                )
+
+                                passwordComponent.on('strength', (e) =&gt; {
+                                    // Strength of password has changed
+                                    console.log('Password strength:', e.value)
+                                })
+                            </code>
+                        </pre>
+            </div>
+        </section>
+
+        <section id="capture-passcode" class="section_main">
+            <h1>Passcode UI Component</h1>
+
+            <p>Weavr supports 2 types of end-user passwords:</p>
+            <ul>
+                <li><strong>Password</strong> made up of at least 8 alphanumeric and symbol characters</li>
+                <li><strong>Passcode</strong> made up of 4 digits</li>
+            </ul>
+
+            <p>
+                If you already require your customers to authenticate to use your application, you can
+                authenticate your customers with Weavr using a passcode instead of a password.
+            </p>
+
+            <h2>Embedding the Passcode Component</h2>
+
+            <p>
+                The <em>Passcode</em> UI component lets you collect your customer’s passcode securely and
+                converts it into a token, which you can safely send to Weavr using the API.
+            </p>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Define a form in which you will ask your customer to input their passcode --&gt;
+                                    &lt;form onSubmit="onSubmit(); return false;"&gt;
+                                        &lt;!-- Normal input to accept the user name--&gt;
+                                        Username: &lt;input type="input" name="user" /&gt;
+                                        &lt;!-- Div to be replaced with the pass code component --&gt;
+                                        Passcode: &lt;div id="passcode"&gt;&lt;/div&gt;
+
+                                        &lt;input type="submit" value="Login" /&gt;
+                                    &lt;/form&gt;
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const passcodeComponent = WeavrComponents.capture.passCode(
+                                    '{{ component name }}',
+                                    {
+                                        placeholder: 'Pass Code'
+                                    }
+                                )
+
+                                passcodeComponent.mount('#passcode')
+
+                                function onSubmit() {
+                                    passcodeComponent.createToken()
+                                        .then(res =&gt; {
+                                            // Successfully created token
+                                            console.log(res)
+
+                                            // Outputs:
+                                            // {
+                                            //   "tokens": {
+                                            //     "{{ component name }}": "{{ token }}"
+                                            //   }
+                                            // }
+                                        })
+                                        .catch(e =&gt; {
+                                            // Error while creating the token
+                                        })
+                                }
+                            </code>
+                        </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <p>
+                    In this example we create a <code>CapturePasscode</code> react component, using a JSX form
+                    to display an input, passing in the initialised Weavr Components instance as a prop. This
+                    component can then be added wherever the user wants to add the Weavr Pass code Component.
+                </p>
+                <p>
+                    The result of the query is then displayed in a div below the pass code component
+                </p>
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class CapturePasscode extends React.Component {
+                                        passCodeComponent = null
+
+                                        constructor(props) {
+                                            super(props);
+
+                                            this.state = {
+                                                response: ''
+                                            }
+                                        }
+
+                                        componentDidMount() {
+                                            const weavrComponents = this.props.weavrComponents;
+                                            this.passCodeComponent = weavrComponents.capture.passCode(
+                                                'passCode',
+                                                {
+                                                    placeholder: 'Pass Code'
+                                                }
+                                            )
+
+                                            this.passCodeComponent.mount('#passCode')
+                                        }
+
+                                        onSubmit(ev) {
+                                            ev.preventDefault();
+
+                                            this.passCodeComponent.createToken()
+                                                .then(res => {
+                                                    this.setState({
+                                                        response: JSON.stringify(res, null, 2)
+                                                    })
+                                                })
+                                                .catch(e => {
+                                                    // Error while creating the token
+                                                    this.setState({
+                                                        response: e
+                                                    })
+                                                })
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2 className="grid__row">Pass Code Component&lt;/h2>
+
+                                                    &lt;form onSubmit={(ev) => this.onSubmit(ev)}>
+                                                        &lt;div id="passCode">&lt;/div>
+
+                                                        &lt;input type="submit" value="Submit"/>
+                                                    &lt;/form>
+
+                                                    &lt;div className="weavr-response">
+                                                        &lt;div>Response&lt;/div>
+                                                        &lt;textarea readOnly rows="5" value={this.state.response}>&lt;/textarea>
+                                                    &lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <p>
+                    In this example we create the <code>app-capture-passcode</code> angular component,
+                    passing in the initialised Weavr Components instance as an input. This component can then
+                    be added wherever the user wants to add the Weavr Passcode Component.
+                </p>
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;div>
+                                        &lt;h2>Capture Passcode UI Component&lt;/h2>
+
+                                        &lt;div id="passcode">&lt;/div>
+                                        &lt;input type="submit" value="Submit" (click)="onPasscodeSubmit()"/>
+
+                                        &lt;div className="weavr-response">
+                                            &lt;div>Response&lt;/div>
+                                            &lt;textarea readOnly rows="5" [value]="response">&lt;/textarea>
+                                        &lt;/div>
+                                    &lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input, OnInit } from '@angular/core'
+
+                                    @Component({
+                                        selector: 'app-capture-passcode',
+                                        templateUrl: './capture-passcode.component.html',
+                                        styleUrls: ['./capture-passcode.component.css']
+                                    })
+                                    export class CapturePasscodeComponent implements OnInit {
+                                        @Input() weavrComponents!: any;
+
+                                        response: string = ''
+                                        passcodeComponent: any;
+
+                                        constructor() { }
+
+                                        ngOnInit() {
+                                            this.passcodeComponent = this.weavrComponents.capture.passCode(
+                                                'passcode',
+                                                {
+                                                    placeholder: 'Passcode',
+                                                    maxlength: 20
+                                                }
+                                            )
+
+                                            this.passcodeComponent.mount('#passcode')
+                                        }
+
+                                        onPasscodeSubmit() {
+                                            this.passcodeComponent.createToken()
+                                                .then((res: any) => {
+                                                    this.response = JSON.stringify(res, null, 2)
+                                                })
+                                                .catch((e:any) => {
+                                                    this.response = e.toString()
+                                                })
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+
+            <h2>Authenticate the user</h2>
+            <p>
+                Now that you have the tokenised passcode, you can authenticate the user using that passcode.
+                Pass the username and tokenised passcode to the <code>/login_with_password</code> API call,
+                and get an authentication token in the response, to be used in subsequent API calls
+            </p>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/loginWithPassword"
+                class="endpoint-link"
+                target="_blank">
+                /login_with_password
+            </a>
+        </section>
+
+        <section id="capture-card-pin" class="section_main">
+            <h2>Card Pin UI Component</h2>
+            <strong>User token must be set to use this component</strong>
+
+            <p>
+                When you upgrade a virtual card to a physical card, you can optionally assign a specific PIN
+                to the physical card. If you do not specify a PIN, the system will assign a random PIN to the
+                physical card. The card PIN is considered PCI-sensitive data and therefore you must use the
+                Capture Card PIN component to capture the PIN securely.
+            </p>
+
+            <div class="documentation__tip">
+                <div class="documentation__tip_header">
+                    Tip
+                </div>
+                <p>
+                    You need to use this component only if you are issuing physical cards.
+                </p>
+            </div>
+
+            <h2>Embedding the Capture Card Pin Component</h2>
+
+            <p>
+                The <em>Capture Card PIN</em> UI component lets you collect your customer’s card PIN securely
+                and converts it into a token, which you can then safely send to Weavr using the API.
+            </p>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    <!-- Define a form in which you will ask your customer to input their password -->
+                                    &lt;form onSubmit="onSubmit(); return false;"&gt;
+                                        &lt;!-- Div to be replaced with the capture pin component --&gt;
+                                        Pin: &lt;div id="pin"&gt;&lt;/div&gt;
+
+                                        &lt;input type="submit" value="Create" /&gt;
+                                    &lt;/form&gt;
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const pinComponent = WeavrComponents.capture.cardPin(
+                                    '{{ component name }}',
+                                    {
+                                        placeholder: 'Card Pin'
+                                    }
+                                );
+
+                                pinComponent.mount('#pin')
+
+                                function onSubmit() {
+                                    pinComponent.createToken()
+                                        .then(res =&gt; {
+                                            // Successfully created token
+                                            console.log(res)
+
+                                            // Outputs:
+                                            // {
+                                            //   "tokens": {
+                                            //     "{{ component name }}": "{{ token }}"
+                                            //   }
+                                            // }
+                                        })
+                                        .catch(e =&gt; {
+                                            // Error while creating the token
+                                        })
+                                }
+                            </code>
+                        </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <p>
+                    In this example we create a <code>CapturePin</code> react component, using a JSX form
+                    to display an input, passing in the initialised Weavr Components instance as a prop. This
+                    component can then be added wherever the user wants to add the Weavr Capture Pin Component.
+                </p>
+                <p>
+                    The result of the query is then displayed in a div below the pass code component
+                </p>
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class CapturePin extends React.Component {
+                                        pinComponent = null
+
+                                        constructor(props) {
+                                            super(props);
+
+                                            this.state = {
+                                                response: ''
+                                            }
+                                        }
+
+                                        componentDidMount() {
+                                            const weavrComponents = this.props.weavrComponents;
+                                            this.pinComponent = weavrComponents.capture.cardPin(
+                                                'cardPin',
+                                                {
+                                                    placeholder: 'Card Pin'
+                                                }
+                                            )
+
+                                            this.pinComponent.mount('#pin')
+                                        }
+
+                                        onSubmit(ev) {
+                                            ev.preventDefault();
+
+                                            this.pinComponent.createToken()
+                                                .then(res => {
+                                                    this.setState({
+                                                        response: JSON.stringify(res, null, 2)
+                                                    })
+                                                })
+                                                .catch(e => {
+                                                    // Error while creating the token
+                                                    this.setState({
+                                                        response: e
+                                                    })
+                                                })
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2 className="grid__row">Capture Card Pin Component&lt;/h2>
+
+                                                    &lt;form onSubmit={(ev) => this.onSubmit(ev)}>
+                                                        &lt;div id="pin">&lt;/div>
+
+                                                        &lt;input type="submit" value="Submit"/>
+                                                    &lt;/form>
+
+                                                    &lt;div className="weavr-response">
+                                                        &lt;div>Response&lt;/div>
+                                                        &lt;textarea readOnly rows="5" value={this.state.response}>&lt;/textarea>
+                                                    &lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+
+            <div class="example-angular">
+                <p>
+                    In this example we create a <code>app-capture-card-pin</code> angular component, passing in
+                    the initialised Weavr Components instance as an input. This component can then be added
+                    wherever the user wants to add the Capture Card Pin Component.
+                </p>
+                <p>
+                    The result of the query is then displayed in a div below the pass code component
+                </p>
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;div>
+                                        &lt;h2>Capture Card PIN UI Component&lt;/h2>
+
+                                        &lt;div id="pin">&lt;/div>
+                                        &lt;input type="submit" value="Submit" (click)="onPinSubmit()"/>
+
+                                        &lt;div className="weavr-response">
+                                            &lt;div>Response&lt;/div>
+                                            &lt;textarea readOnly rows="5" [value]="response">&lt;/textarea>
+                                        &lt;/div>
+                                    &lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input, OnInit } from '@angular/core'
+
+                                    @Component({
+                                        selector: 'app-capture-card-pin',
+                                        templateUrl: './capture-card-pin.component.html',
+                                        styleUrls: ['./capture-card-pin.component.css']
+                                    })
+                                    export class CaptureCardPinComponent implements OnInit {
+                                        @Input() weavrComponents!: any;
+
+                                        response: string = ''
+                                        pinComponent: any;
+
+                                        constructor() { }
+
+                                        ngOnInit() {
+                                            this.pinComponent = this.weavrComponents.capture.cardPin(
+                                                'pin',
+                                                {
+                                                    placeholder: 'Pin',
+                                                    maxlength: 20
+                                                }
+                                            )
+
+                                            this.pinComponent.mount('#pin')
+                                        }
+
+                                        onPinSubmit() {
+                                            this.pinComponent.createToken()
+                                                .then((res: any) => {
+                                                    this.response = JSON.stringify(res, null, 2)
+                                                })
+                                                .catch((e:any) => {
+                                                    this.response = e.toString()
+                                                })
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+
+            <h2>Set the Card's Pin</h2>
+
+            <p>
+                Now that you have the tokenised card PIN, you can use the token when you upgrade the virtual
+                card to a physical card using the API endpoint.
+            </p>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/managedCardPhysicalUpgrade"
+                class="endpoint-link"
+                target="_blank">
+                /managed_cards/{id}/physical
+            </a>
+        </section>
+
+        <section id="capture-kyb" class="section_main">
+            <h1>KYB UI Component</h1>
+            <strong>User token must be set to use this component</strong>
+
+            <p>
+                KYB is one of the steps required to onboard corporate customers onto your application.
+                Weavr provides a <em>KYB</em> component that you can embed in your application. This lets
+                you provide a seamless experience to your user while capturing the required documentation
+                to verify the corporate.
+            </p>
+
+            <h2>Get the KYB Reference</h2>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/corporateKybStart"
+                class="endpoint-link"
+                target="_blank">
+                /corporates/kyb
+            </a>
+
+            <h2>Display the KYB Flow</h2>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Define an HTML container where the KYB flow is to be shown -->
+                                    &lt;div id="kyb-container">&lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    const referenceId = {{ Reference ID }}
+                                    WeavrComponents.capture.corporateKyb(referenceId).mount(
+                                        '#kyb-container',
+                                        {
+                                            // String specifying the language the KYC flow is be displayed in (ISO 639-1 format) (optional, defaults to english)
+                                            lang: 'en',
+
+                                            // String specifying the applicant email (optional)
+                                            email: '',
+
+                                            // String specifying the applicant email (optional)
+                                            mobile: '',
+
+                                            // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                            customCssStr: {{customCssStr}},
+
+                                            // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                            customCss: {{customCss}},
+
+                                            // Receive updates on the status of the KYC
+                                            // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                            // (optional)
+                                            onMessage: function(message, additionalInfo) {
+                                              console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                            },
+
+                                            // Handle errors
+                                            // (optional)
+                                            onError: function(message) {
+                                              console.log("Weavr KYC UI Component error: ", message);
+                                            }
+                                        }
+                                    )
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class CaptureKyb extends React.Component {
+                                        // Pass Weavr Component instance as a prop called weavrComponents
+                                        // Pass the KYB reference id as referenceId
+                                        constructor(props) {
+                                            super(props);
+                                        }
+
+                                        componentDidMount() {
+                                            const weavrComponents = this.props.weavrComponents;
+                                            const referenceId = this.props.referenceId;
+
+                                            weavrComponents.capture.corporateKyb(referenceId).mount(
+                                                '#display-kyb',
+                                                {
+                                                    // String specifying the applicant email (optional)
+                                                    email: '',
+
+                                                    // String specifying the applicant email (optional)
+                                                    mobile: '',
+
+                                                    // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCssStr: {{customCssStr}},
+
+                                                    // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCss: {{customCss}},
+
+                                                    // Receive updates on the status of the KYC
+                                                    // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                                    // (optional)
+                                                    onMessage: function(message, additionalInfo) {
+                                                      console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                                    },
+
+                                                    // Handle errors
+                                                    // (optional)
+                                                    onError: function(message) {
+                                                      console.log("Weavr KYC UI Component error: ", message);
+                                                    }
+                                                }
+                                            )
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2>Display Corporate Kyb Component&lt;/h2>
+                                                    &lt;div id="display-kyb">&lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;h2>Display Corporate Kyb Component&lt;/h2>
+
+                                    &lt;div id="display-kyb">&lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input, OnInit } from '@angular/core'
+
+                                    @Component({
+                                        selector: 'app-capture-kyb',
+                                        templateUrl: './capture-kyb.component.html',
+                                        styleUrls: ['./capture-kyb.component.css']
+                                    })
+                                    export class CaptureKybComponent implements OnInit {
+                                        @Input() weavrComponents!: any;
+                                        @Input() referenceId!: string;
+
+                                        ngOnInit() {
+                                            this.weavrComponents.capture.corporateKyb(this.referenceId).mount(
+                                                '#display-kyb',
+                                                {
+                                                    // String specifying the applicant email (optional)
+                                                    email: '',
+
+                                                    // String specifying the applicant email (optional)
+                                                    mobile: '',
+
+                                                    // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCssStr: {{customCssStr}},
+
+                                                    // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCss: {{customCss}},
+
+                                                    // Receive updates on the status of the KYC
+                                                    // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                                    // (optional)
+                                                    onMessage: function(message, additionalInfo) {
+                                                      console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                                    },
+
+                                                    // Handle errors
+                                                    // (optional)
+                                                    onError: function(message) {
+                                                      console.log("Weavr KYC UI Component error: ", message);
+                                                    }
+                                                }
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="capture-kyc" class="section_main">
+            <h1>KYC UI Component</h1>
+            <strong>User token must be set to use this component</strong>
+
+            <p>
+                KYC due diligence is one of the steps required to
+                <a href="https://docs.weavr.io/docs/multi/identities/multi-onboard-consumer/">onboard consumers</a>
+                onto your application. Weavr provides a <em>KYC</em> component that you can embed in your
+                application. This lets you provide a seamless experience to your user while capturing
+                the required documentation to verify their identity.
+            </p>
+
+            <h2>Get the KYC Reference</h2>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/consumerKycStart"
+                class="endpoint-link"
+                target="_blank">
+                /consumers/kyc
+            </a>
+
+            <h2>Display the KYC</h2>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Define an HTML container where the KYC flow is to be shown -->
+                                    &lt;div id="kyc_consumer-container">&lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                const referenceId = {{ Reference ID }}
+                                WeavrComponents.capture.consumerKyc(referenceId).mount(
+                                    '#kyc_consumer-container',
+                                    {
+                                        // String specifying the applicant email (optional)
+                                        email: '',
+
+                                        // String specifying the applicant email (optional)
+                                        mobile: '',
+
+                                        // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                        customCssStr: {{customCssStr}},
+
+                                        // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                        customCss: {{customCss}},
+
+                                        // Receive updates on the status of the KYC
+                                        // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                        // (optional)
+                                        onMessage: function(message, additionalInfo) {
+                                          console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                        },
+
+                                        // Handle errors
+                                        // (optional)
+                                        onError: function(message) {
+                                          console.log("Weavr KYC UI Component error: ", message);
+                                        }
+                                    }
+                                )
+                            </code>
+                        </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class CaptureKyc extends React.Component {
+                                        // Pass Weavr Component instance as a prop called weavrComponents
+                                        // Pass the KYC reference id as referenceId
+                                        constructor(props) {
+                                            super(props);
+                                        }
+
+                                        componentDidMount() {
+                                            const weavrComponents = this.props.weavrComponents;
+                                            const referenceId = this.props.referenceId;
+
+                                            weavrComponents.capture.consumerKyc(referenceId).mount(
+                                                '#display-kyc',
+                                                {
+                                                    // String specifying the language the KYC flow is be displayed in (ISO 639-1 format) (optional, defaults to english)
+                                                    lang: 'en',
+
+                                                    // String specifying the applicant email (optional)
+                                                    email: '',
+
+                                                    // String specifying the applicant email (optional)
+                                                    mobile: '',
+
+                                                    // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCssStr: {{customCssStr}},
+
+                                                    // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCss: {{customCss}},
+
+                                                    // Receive updates on the status of the KYC
+                                                    // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                                    // (optional)
+                                                    onMessage: function(message, additionalInfo) {
+                                                      console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                                    },
+
+                                                    // Handle errors
+                                                    // (optional)
+                                                    onError: function(message) {
+                                                      console.log("Weavr KYC UI Component error: ", message);
+                                                    }
+                                                }
+                                            )
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2>Display Consumer Kyc Component&lt;/h2>
+                                                    &lt;div id="display-kyc">&lt;/div>
+                                                &lt;/div>
+                                                )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;h2>Display Consumer Kyc Component&lt;/h2>
+
+                                    &lt;div id="display-kyc">&lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input, OnInit } from '@angular/core'
+
+                                    @Component({
+                                        selector: 'app-capture-kyc',
+                                        templateUrl: './capture-kyc.component.html',
+                                        styleUrls: ['./capture-kyc.component.css']
+                                    })
+                                    export class CaptureKycComponent implements OnInit {
+                                        @Input() weavrComponents!: any;
+                                        @Input() referenceId!: string;
+
+                                        ngOnInit() {
+                                            this.weavrComponents.capture.consumerKyc(this.referenceId).mount(
+                                                '#display-kyc'
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="capture-director-kyc" class="section_main">
+            <h1>Director KYC UI Component</h1>
+            <strong>User token must be set to use this component</strong>
+            <p>
+                During the KYB process, the system asks the user to enter information about UBOs and
+                directors/representatives. Weavr will send emails directly to the directors/representatives
+                named during the KYB process so that they can submit their KYC documentation. A corporate
+                customer must have at least 1 director or representative verified as part of the due diligence.
+            </p>
+            <p>
+                The content of the emails received by the directors/representatives will include a link that
+                leads to a page in your application where you must embed the <em>Director KYC</em> UI component.
+                The URL will also include a <code>reference</code> that is required to initialise the component.
+            </p>
+
+            <h2>Display Director KYC Flow</h2>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Define an HTML container where the Directory KYC flow is to be shown -->
+                                    &lt;div id="directory-kyc-container">&lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    const referenceId = {{ Reference ID }}
+                                    WeavrComponents.capture.beneficiariesKyc(referenceId).mount(
+                                        '#directory-kyc-container',
+                                        {
+                                            // String specifying the applicant email (optional)
+                                            email: '',
+
+                                            // String specifying the applicant email (optional)
+                                            mobile: '',
+
+                                            // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                            customCssStr: {{customCssStr}},
+
+                                            // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                            customCss: {{customCss}},
+
+                                            // Receive updates on the status of the KYC
+                                            // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                            // (optional)
+                                            onMessage: function(message, additionalInfo) {
+                                              console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                            },
+
+                                            // Handle errors
+                                            // (optional)
+                                            onError: function(message) {
+                                              console.log("Weavr KYC UI Component error: ", message);
+                                            }
+                                        }
+                                    )
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class CaptureDirectorKyc extends React.Component {
+                                        // Pass Weavr Component instance as a prop called weavrComponents
+                                        // Pass the Director KYC reference id as referenceId
+                                        constructor(props) {
+                                            super(props);
+                                        }
+
+                                        componentDidMount() {
+                                            const weavrComponents = this.props.weavrComponents;
+                                            const referenceId = this.props.referenceId;
+
+                                            weavrComponents.capture.beneficiariesKyc(referenceId).mount(
+                                                '#display-dirKyc',
+                                                {
+                                                    // String specifying the applicant email (optional)
+                                                    email: '',
+
+                                                    // String specifying the applicant email (optional)
+                                                    mobile: '',
+
+                                                    // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCssStr: {{customCssStr}},
+
+                                                    // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCss: {{customCss}},
+
+                                                    // Receive updates on the status of the KYC
+                                                    // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                                    // (optional)
+                                                    onMessage: function(message, additionalInfo) {
+                                                      console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                                    },
+
+                                                    // Handle errors
+                                                    // (optional)
+                                                    onError: function(message) {
+                                                      console.log("Weavr KYC UI Component error: ", message);
+                                                    }
+                                                }
+                                            )
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2>Display Director Kyc Component&lt;/h2>
+                                                    &lt;div id="display-dirKyc">&lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;h2>Display Director Kyc Component&lt;/h2>
+
+                                    &lt;div id="display-dirKyc">&lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input, OnInit } from '@angular/core'
+
+                                    @Component({
+                                        selector: 'app-capture-kyc-beneficiary',
+                                        templateUrl: './capture-kyc-beneficiary.component.html',
+                                        styleUrls: ['./capture-kyc-beneficiary.component.css']
+                                    })
+                                    export class CaptureKycBeneficiaryComponent implements OnInit {
+                                        @Input() weavrComponents!: any;
+                                        @Input() referenceId!: string;
+
+                                        ngOnInit() {
+                                            this.weavrComponents.capture.beneficiariesKyc(this.referenceId).mount(
+                                                '#display-dirKyc',
+                                                {
+                                                    // String specifying the applicant email (optional)
+                                                    email: '',
+
+                                                    // String specifying the applicant email (optional)
+                                                    mobile: '',
+
+                                                    // Specify a string of plain text styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCssStr: {{customCssStr}},
+
+                                                    // Specify a CSS file containing styles to brand the UI elements shown in the KYC flow (optional)
+                                                    customCss: {{customCss}},
+
+                                                    // Receive updates on the status of the KYC
+                                                    // Once the consumer has submitted all documentation you will receive a `kycSubmitted` message
+                                                    // (optional)
+                                                    onMessage: function(message, additionalInfo) {
+                                                      console.log("Weavr KYC UI Component message: ", message, additionalInfo);
+                                                    },
+
+                                                    // Handle errors
+                                                    // (optional)
+                                                    onError: function(message) {
+                                                      console.log("Weavr KYC UI Component error: ", message);
+                                                    }
+                                                }
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="display-card-number" class="section_main">
+            <h1>Display Card Number</h1>
+            <strong>User token must be set to use this component</strong>
+
+            <p>
+                When you retrieve your customers’ card details, the Weavr api replies with tokenised card
+                numbers. You need to use the <em>Display Card Number</em> UI component to de-tokenise
+                the card number and show it to your customer.
+            </p>
+
+            <h2>Get the Tokenised Card Number</h2>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/managedCardGet"
+                class="endpoint-link"
+                target="_blank">
+                /managed_cards/{id}
+            </a>
+
+            <h3>Display the Card Number</h3>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Div to be replaced with the card number component --&gt;
+                                    Card Number: &lt;div id="cardNumber"&gt;&lt;/div&gt;
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                // First Instantiate WeavrComponents using the UI Key and User Auth Token
+
+                                // Then pass the tokenised card number and mount the component
+                                const cardNumber = {{ Tokenised card number }}
+                                const displayCardNumber = WeavrComponents.display.cardNumber(cardNumber)
+                                displayCardNumber.mount('#cardNumber')
+                            </code>
+                        </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class DisplayCardNumber extends React.Component {
+                                        // Pass weavrComponents instance as prop
+                                        constructor(props) {
+                                            super(props);
+                                            this.state = {
+                                                value: ''
+                                            };
+
+                                            this.handleChange = this.handleChange.bind(this);
+                                        }
+
+                                        handleChange(event) {
+                                            this.setState({value: event.target.value});
+                                        }
+
+                                        onSubmit(ev) {
+                                            ev.preventDefault();
+
+                                            const weavrComponents = this.props.weavrComponents;
+                                            const displayCardNumber = weavrComponents.display.cardNumber(this.state.value)
+                                            displayCardNumber.mount('#response-cardNumber')
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2>Display Card Number Component&lt;/h2>
+
+                                                    &lt;form onSubmit={(ev) => this.onSubmit(ev)}>
+                                                        &lt;input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Card Number"/>
+                                                        &lt;input type="submit" value="Submit"/>
+                                                    &lt;/form>
+
+                                                    &lt;div className="weavr-response">
+                                                        &lt;div>Response&lt;/div>
+                                                        &lt;div id="response-cardNumber"/>
+                                                    &lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;h2>Display Card Number Component&lt;/h2>
+
+                                    &lt;form [formGroup]="form" (ngSubmit)="submit()">
+                                        &lt;input type="text" placeholder="Card Number" formControlName="cardNumber"/>
+                                        &lt;input type="submit" value="Submit"/>
+                                    &lt;/form>
+
+                                    &lt;div className="weavr-response">
+                                        &lt;div>Response&lt;/div>
+                                        &lt;div id="response-cardNumber">&lt;/div>
+                                    &lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input } from '@angular/core'
+                                    import { FormBuilder } from '@angular/forms'
+
+                                    @Component({
+                                        selector: 'app-display-card-number',
+                                        templateUrl: './display-card-number.component.html',
+                                        styleUrls: ['./display-card-number.component.css']
+                                    })
+                                    export class DisplayCardNumberComponent {
+                                        @Input() weavrComponents!: any
+
+                                        form = this.formBuilder.group({
+                                            cardNumber: ''
+                                        })
+
+                                        constructor(
+                                            private formBuilder: FormBuilder
+                                        ) {}
+
+                                        submit() {
+                                            if (!this.form.value.cardNumber) return
+                                            const displayCardNumber = this.weavrComponents.display.cardNumber(this.form.value.cardNumber)
+                                            displayCardNumber.mount('#response-cardNumber')
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="display-card-pin" class="section_main">
+            <h2>Display Card Pin</h2>
+            <strong>User token must be set to use this component</strong>
+
+            <p>
+                Physical cards have an associated PIN. Cardholders use the PIN for in-person purchases at a
+                point of sale and they use the CVV for online purchases. The card’s PIN is considered
+                PCI-sensitive data and therefore you must display it to the user using the Display Card
+                PIN UI component.
+            </p>
+
+            <div class="documentation__tip">
+                <div class="documentation__tip_header">
+                    Tip
+                </div>
+                <p>
+                    You need to use this component only if you are issuing physical cards.
+                </p>
+            </div>
+
+            <h3>Get the tokenised PIN Number</h3>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/managedCardGet"
+                class="endpoint-link"
+                target="_blank">
+                /managed_cards/{id}
+            </a>
+
+            <p>The tokenised PIN is returned in the response as <code>pin</code>.</p>
+
+            <h3>Display the PIN Number</h3>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                        <pre>
+                            <code class="language-html">
+                                &lt;!-- Div to be replaced with the card pin component --&gt;
+                                PIN: &lt;div id="cardPin"&gt;&lt;/div&gt;
+                            </code>
+                        </pre>
+                </div>
+                <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    // First Instantiate WeavrComponents using the UI Key and User Auth Token
+
+                                    // Then pass the tokenised card number and mount the component
+                                    const cardPin = {{ Tokenised card pin }}
+                                    const displayCardPin = WeavrComponents.display.cardPin(cardPin)
+                                    displayCardPin.mount('#cardPin')
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class DisplayCardPinNumber extends React.Component {
+                                        constructor(props) {
+                                            super(props);
+                                            this.state = {
+                                                value: ''
+                                            };
+
+                                            this.handleChange = this.handleChange.bind(this);
+                                        }
+
+                                        handleChange(event) {
+                                            this.setState({value: event.target.value});
+                                        }
+
+                                        onSubmit(ev) {
+                                            ev.preventDefault();
+
+                                            const weavrComponents = this.props.weavrComponents;
+                                            const displayCardPin = weavrComponents.display.cardPin(this.state.value)
+                                            displayCardPin.mount('#response-pin')
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2>Display Card PIN Number Component&lt;/h2>
+
+                                                    &lt;form onSubmit={(ev) => this.onSubmit(ev)}>
+                                                        &lt;input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Card PIN Number"/>
+                                                        &lt;input type="submit" value="Submit"/>
+                                                    &lt;/form>
+
+                                                    &lt;div className="weavr-response">
+                                                        &lt;div>Response&lt;/div>
+                                                        &lt;div id="response-pin"/>
+                                                    &lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;h2>Display Card Pin Component&lt;/h2>
+
+                                    &lt;form [formGroup]="form" (ngSubmit)="submit()">
+                                      &lt;input type="text" placeholder="Card Pin" formControlName="cardPin"/>
+                                      &lt;input type="submit" value="Submit"/>
+                                    &lt;/form>
+
+                                    &lt;div className="weavr-response">
+                                      &lt;div>Response&lt;/div>
+                                      &lt;div id="response-pin">&lt;/div>
+                                    &lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input } from '@angular/core'
+                                    import { FormBuilder } from '@angular/forms'
+
+                                    @Component({
+                                        selector: 'app-display-card-pin',
+                                        templateUrl: './display-card-pin.component.html',
+                                        styleUrls: ['./display-card-pin.component.css']
+                                    })
+                                    export class DisplayCardPinComponent {
+                                        @Input() weavrComponents!: any
+
+                                        form = this.formBuilder.group({
+                                            cardPin: ''
+                                        })
+
+                                        constructor(
+                                            private formBuilder: FormBuilder
+                                        ) {}
+
+                                        submit() {
+                                            if (!this.form.value.cardPin) return
+                                            const displayPin = this.weavrComponents.display.cardPin(this.form.value.cardPin)
+                                            displayPin.mount('#response-pin')
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="display-card-cvv" class="section_main">
+            <h2>Display Card CVV</h2>
+            <strong>User token must be set to use this component</strong>
+
+            <p>
+                When you retrieve your customers’ card details, Weavr gives you tokenised CVV numbers.
+                You need to use the <em>Display Card CVV</em> UI component to de-tokenise the CVV number and
+                show it to your customer.
+            </p>
+
+            <h3>Get the tokenised CVV Number</h3>
+
+            <a href="https://weavr-multi-api.redoc.ly/3.3.1/#operation/managedCardGet"
+                class="endpoint-link"
+                target="_blank">
+                /managed_cards/{id}
+            </a>
+
+            <h3>Display the CVV Number</h3>
+
+            <div class="example-vanilla">
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;!-- Div to be replaced with the card cvv component --&gt;
+                                    Card CVV: &lt;div id="cardCvv"&gt;&lt;/div&gt;
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-js">
+                            <pre>
+                                <code class="language-js">
+                                    // First Instantiate WeavrComponents using the UI Key and User Auth Token
+
+                                    // Then pass the tokenised card cvv number and mount the component
+                                    const cvv = {{ Tokenised cvv number }}
+                                    const displayCvv = WeavrComponents.display.cvv(cvv)
+                                    displayCvv.mount('#cardCvv')
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-react">
+                <div class="code-block language-react">
+                            <pre>
+                                <code class="language-js">
+                                    import React from 'react';
+
+                                    export class DisplayCardCvv extends React.Component {
+                                        constructor(props) {
+                                            super(props);
+                                            this.state = {
+                                                value: ''
+                                            };
+
+                                            this.handleChange = this.handleChange.bind(this);
+                                        }
+
+                                        handleChange(event) {
+                                            this.setState({value: event.target.value});
+                                        }
+
+                                        onSubmit(ev) {
+                                            ev.preventDefault();
+
+                                            const weavrComponents = this.props.weavrComponents;
+                                            const displayCvv = weavrComponents.display.cvv(this.state.value)
+                                            displayCvv.mount('#response-cvv')
+                                        }
+
+                                        render () {
+                                            return (
+                                                &lt;div>
+                                                    &lt;h2>Display Card CVV Component&lt;/h2>
+
+                                                    &lt;form onSubmit={(ev) => this.onSubmit(ev)}>
+                                                        &lt;input type="text" value={this.state.value} onChange={this.handleChange} placeholder="Card CVV"/>
+                                                        &lt;input type="submit" value="Submit"/>
+                                                    &lt;/form>
+
+                                                    &lt;div className="weavr-response">
+                                                        &lt;div>Response&lt;/div>
+                                                        &lt;div id="response-cvv"/>
+                                                    &lt;/div>
+                                                &lt;/div>
+                                            )
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+            <div class="example-angular">
+                <div class="code-block language-angular-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;h2>Display Card CVV Component&lt;/h2>
+
+                                    &lt;form [formGroup]="form" (ngSubmit)="submit()">
+                                        &lt;input type="text" placeholder="Card CVV" formControlName="cvv"/>
+                                        &lt;input type="submit" value="Submit"/>
+                                    &lt;/form>
+
+                                    &lt;div className="weavr-response">
+                                        &lt;div>Response&lt;/div>
+                                        &lt;div id="response-cvv">&lt;/div>
+                                    &lt;/div>
+                                </code>
+                            </pre>
+                </div>
+                <div class="code-block language-angular-script">
+                            <pre>
+                                <code class="language-js">
+                                    import { Component, Input } from '@angular/core'
+                                    import { FormBuilder } from '@angular/forms'
+
+                                    @Component({
+                                        selector: 'app-display-card-cvv',
+                                        templateUrl: './display-card-cvv.component.html',
+                                        styleUrls: ['./display-card-cvv.component.css']
+                                    })
+                                    export class DisplayCardCvvComponent {
+                                        @Input() weavrComponents!: any
+
+                                        form = this.formBuilder.group({
+                                            cvv: ''
+                                        })
+
+                                        constructor(
+                                            private formBuilder: FormBuilder
+                                        ) {}
+
+                                        submit() {
+                                            if (!this.form.value.cvv) return
+                                            const displayCvv = this.weavrComponents.display.cvv(this.form.value.cvv)
+                                            displayCvv.mount('#response-cvv')
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+            </div>
+        </section>
+
+        <section id="mobile-frameworks" class="section_main">
+            <h2>Working with Mobile Native Frameworks</h2>
+
+            <p>
+                Various mobile frameworks like <strong>React-Native</strong>, <strong>Vue-Native</strong>
+                and <strong>Flutter</strong> work by translating their components into native mobile components.
+                This means that given how Weavr Secure Components work, we need to make use of the mobile OS's
+                native webview in order to load and display the secure components.
+            </p>
+            <p>
+                Given certain security restrictions, the easiest way then to show our components in a webview
+                would be to create a securely hosted page, with the component you need, styled as per your
+                requirements online.
+            </p>
+            <p>
+                Some small examples of how this can be done is shown below. The main concept is that once the
+                native web view is loaded with a secure html page containing our script, we can simply follow
+                the same guide as if we were creating a web page with secure components using Vanilla JS.
+            </p>
+            <p>
+                It is up to the developer then to decide how parameters like the ui key, authorisation token
+                and the KYC/KYB reference ids will be passed to the page. Either through URI query parameters,
+                passing messages from the framework to the html page and so on.
+            </p>
+
+            <section id="react-native">
+                <h3>React Native Example</h3>
+                <p>
+                    Below is a simple example of a Web View implementation for React Native, using the
+                    <a href="https://github.com/react-native-webview/react-native-webview" target="_blank">
+                        react-native-webview
+                    </a> package that is used to load a secure html page. Here once the web page has loaded,
+                    we inject an event into the page, with the user auth token.
+                </p>
+                <div class="code-block language-react-native">
+                            <pre>
+                                <code>
+                                    import React, { Component, Fragment, useEffect, useState } from "react";
+                                    import { WebView } from 'react-native-webview';
+                                    import { Text, View } from "react-native";
+
+                                    // Pass the User authorisation token as a prop called `token`
+                                    const WeavrWebView = (props) => {
+                                        let myWebView
+
+                                        const initWeavr = () => {
+                                            const token = props.token;
+                                            myWebView.injectJavaScript(`
+                                                document.dispatchEvent(new CustomEvent('weavrMessage', { detail:{ type: 'uiKey', data: "${ui_key}" } }));
+                                                true;
+                                            `)
+                                        }
+
+                                        return (
+                                            &lt;WebView
+                                                ref={(el) => (myWebView = el)}
+                                                source={{uri: "https://{{link to secure page with UX Components}}"}}
+                                                onLoadEnd={
+                                                    () => {
+                                                      initWeavr()
+                                                    }
+                                                }
+                                            />
+                                        )
+                                    }
+
+                                    export default WeavrWebView
+                                </code>
+                            </pre>
+                </div>
+
+                <p>
+                    Next we have the secure html file that we loaded within the Web View.
+                    Setting up the elements necessary to initialise the Capture Password Component
+                </p>
+
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;html>
+                                        &lt;head>
+                                            &lt;meta charset="utf-8" />
+                                            &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+                                            &lt;-- Load the Weavr Component Script -->
+                                            &lt;script src="https://js.weavr.io/qa/weavr-client-v2.js">&lt;/script>
+                                            &lt;-- Load the vanilla js script used to initialise the Weavr Components -->
+                                            &lt;script type="text/javascript" src="./index.js">&lt;/script>
+
+                                        &lt;/head>
+                                        &lt;body style="padding: 0px; margin: 0px;">
+                                            &lt;div id="container" style="padding: 0px; margin: 0px;">
+                                                &lt;!-- Define a form in which you will ask your customer to input their password -->
+                                                &lt;form id="password-form" onSubmit="return false;">
+                                                &lt;!-- Div to be replaced with the password component -->
+                                                    Password: &lt;div id="password">&lt;/div>
+
+                                                    &lt;input type="submit" value="Login" />
+                                                &lt;/form>
+                                            &lt;/div>
+                                            &lt;div id="response">
+                                            &lt;/div>
+                                        &lt;/body>
+                                    &lt;/html>
+                                </code>
+                            </pre>
+                </div>
+
+                <p>
+                    Finally we have to listen for the message sent to us by the React Native component,
+                    initialise the Weavr Secure Components and mount the Capture Password component.
+                </p>
+
+                <div class="code-block language-js">
+                        <pre>
+                            <code class="language-js">
+                                let passwordComponent;
+                                let WeavrComponents;
+
+                                function initialise (uiKey) {
+                                    WeavrComponents = window.weavr.init(uiKey);
+
+                                    createPasswordComponent();
+                                };
+
+                                function createPasswordComponent() {
+                                    passwordComponent = WeavrComponents.capture.password(
+                                        'password',
+                                        {
+                                          placeholder: 'Password'
+                                        }
+                                    )
+                                    passwordComponent.mount('#password')
+                                }
+
+                                function onSubmitPassword(e) {
+                                    e.preventDefault()
+
+                                    const responseElement = document.getElementById('response');
+                                    responseElement.innerText = "";
+                                    passwordComponent.createToken()
+                                        .then(res => {
+                                            responseElement.innerText = 'Password token: ' + res.tokens.password
+                                        })
+                                        .catch(e => {
+                                            responseElement.innerText = 'Error: ' + e
+                                        })
+                                }
+
+                                document.addEventListener("weavrMessage",(data) => {
+                                    if(data?.detail?.type === 'uiKey') {
+                                      initialise(data.detail.data)
+                                    }
+                                  });
+
+                                window.onload = () => {
+                                  const passwordForm = document.getElementById('password-form')
+                                  passwordForm.addEventListener('submit', onSubmitPassword)
+                                }
+
+                            </code>
+                        </pre>
+                </div>
+            </section>
+
+            <section id="flutter">
+                <h3>Flutter</h3>
+                <p>
+                    In order to make use of the Weavr Secure Components, we need to make use of the
+                    webview. To do this we need to add your favourite Flutter web view package. In this example
+                    we used the
+                    <a target="_blank" href="https://pub.dev/packages/webview_flutter">webview_flutter</a>
+                    package, you can follow their
+                    <a href="https://pub.dev/packages/webview_flutter/install" target="_blank">installation</a>
+                    guide to get started with it.
+                </p>
+
+                <p>
+                    Lets start by creating our webview component and set it up to load our securely hosted page.
+                </p>
+                <div class="code-block language-dart">
+                            <pre>
+                                <code class="language-dart">
+                                    import 'package:webview_flutter/webview_flutter.dart';
+                                    import 'package:flutter/material.dart';
+                                    import 'package:flutter/services.dart';
+
+                                    class WebViewContainer extends StatefulWidget {
+                                        WebViewContainer();
+
+                                        @override
+                                        createState() => _WebViewContainerState();
+                                    }
+
+                                    class _WebViewContainerState extends State&lt;WebViewContainer> {
+                                        late WebViewController _controller;
+
+                                        _WebViewContainerState();
+
+                                        @override
+                                        Widget build(BuildContext context) {
+                                            return Scaffold(
+                                                appBar: AppBar(title: Text('Weavr UX Components')),
+                                                body: Column(
+                                                    children: [
+                                                        Expanded(
+                                                            child: WebView(
+                                                            javascriptMode: JavascriptMode.unrestricted,
+                                                            initialUrl: 'https://{{link to secure page with UX Components',
+                                                            onWebViewCreated: (WebViewController webViewController) {
+                                                                _controller = webViewController;
+                                                            },
+                                                            javascriptChannels: [
+                                                                JavascriptChannel(name: 'Channel', onMessageReceived: (message) {
+                                                                    // Get the tokenised password via channel messages
+                                                                    print('Channel message: ' + message);
+                                                                })
+                                                            ].toSet(),
+                                                        ))
+                                                    ],
+                                                ));
+                                        }
+                                    }
+                                </code>
+                            </pre>
+                </div>
+                <p>
+                    Next we will add content to the index.html file created under the assets directory. Here we
+                    add our Sandbox environment script in the head, and add a div with id <code>password</code>
+                    where the Capture Password component will be mounted.
+                </p>
+                <p>
+                    Now we create the html page, which will container a script to initialise the
+                    Weavr Components and mount the Capture Password component.
+                </p>
+                <div class="code-block language-html">
+                            <pre>
+                                <code class="language-html">
+                                    &lt;html>
+                                    &lt;head>
+                                        &lt;meta charset="utf-8" />
+                                        &lt;meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                                        &lt;script src="https://js.weavr.io/qa/weavr-client-v2.js">&lt;/script>
+                                    &lt;/head>
+                                    &lt;body>
+                                    &lt;div id="container">
+                                        &lt;!-- Define a form in which you will ask your customer to input their password -->
+                                        &lt;form id="password-form" onSubmit="return false;">
+                                            &lt;!-- Div to be replaced with the password component -->
+                                            Password: &lt;div id="password">&lt;/div>
+
+                                            &lt;input type="submit" value="Login" />
+                                        &lt;/form>
+
+                                        &lt;div id="response">&lt;/div>
+                                    &lt;/div>
+
+                                    &lt;script>
+                                        const UI_KEY = {{ ui key }};
+
+                                        let passwordComponent;
+                                        const WeavrComponents = window.weavr.init(UI_KEY);
+
+                                        function createPasswordComponent() {
+                                            passwordComponent = WeavrComponents.capture.password(
+                                                'password',
+                                                {
+                                                    placeholder: 'Password'
+                                                }
+                                            )
+
+                                            passwordComponent.mount('#password')
+                                        }
+
+                                        function onSubmitPassword(e) {
+                                            e.preventDefault()
+
+                                            passwordComponent.createToken()
+                                                .then(res => {
+                                                    document.getElementById("response").innerText = 'Password token: ' + res.tokens.password
+                                                    window.Channel.postMessage(JSON.stringify({
+                                                        password: res.tokens.password
+                                                    }))
+                                                })
+                                                .catch(e => {
+                                                    document.getElementById("response").innerText = 'Error: ' + e
+                                                })
+                                        }
+
+                                        window.onload = () => {
+                                            const passwordForm = document.getElementById('password-form')
+                                            passwordForm.addEventListener('submit', onSubmitPassword)
+                                        }
+
+                                        createPasswordComponent();
+                                    &lt;/script>
+                                    &lt;/body>
+                                    &lt;/html>
+                                </code>
+                            </pre>
+                </div>
+                <p>
+                    Then what is left to do is add the component wherever you need it.
+                </p>
+            </section>
+        </section>
+    </div>
+
+    <div class="testing p-2" style="display: block">
+        <!-- Initialisation form -->
+
+        <h3>Component Init</h3>
+        <form id="ui-form" class="grid grid__label-value mb-1">
+            <label>API Key</label>
+            <input type="text" id="input-api-key" />
+            <label>UI Key</label>
+            <input type="text" id="input-ui-key" />
+
+            <div class="grid__row">
+                <input id="init-btn" type="submit" value="Start initialise">
+            </div>
+        </form>
+
+        <h3>Login</h3>
+        <form id="init-form" class="grid grid__label-value mb-1">
+            <label>Username</label>
+            <input type="text" id="input-username" />
+
+            <label>Password</label>
+
+            <div id="input_password">Initialise for password component</div>
+
+            <label>Current Auth Key</label>
+            <textarea id="input-auth-key" rows="12" readonly></textarea>
+
+            <div class="grid__row text-center">
+                <h3 id="init-message"></h3>
+            </div>
+
+            <label class="text-muted grid__row">
+                Either the Username + Password or the Auth key need to be set in order to initialise<br />
+                Requests are made to the sandbox environment on<br /><code>https://js.weavr.io/qa/weavr-client-v2.js</code>
+            </label>
+
+            <div class="grid__row">
+                <input type="submit" value="Login">
+            </div>
+        </form>
+
+        <div class="mb-1">
+            <h3>SCA</h3>
+            <button id="btn-challenge" class="mb-1">Issue Challenge</button>
+            <form id="challenge-form" class="grid grid__label-value">
+                <label>Challenge</label>
+                <input type="text" id="input-challenge" placeholder="123456" />
+
+                <input type="submit" value="Verify" />
+            </form>
+        </div>
+
+        <div class="weavr-component">
+            <div class="weavr-component_no-token">
+                <!-- Capture -->
+                <div id="component_capture_password" class="grid grid__request-response">
+                    <h2 class="grid__row">Password UI Component</h2>
+
+                    <form id="form_capture_password">
+                        <div id="input_capture_password"></div>
+
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div class="weavr-response">
+                        <div>Response</div>
+                        <textarea id="response_capture_password" readonly rows="5"></textarea>
+                    </div>
+                </div>
+
+                <div id="component_capture_pass-code" class="grid grid__request-response">
+                    <h2 class="grid__row">Passcode UI Component</h2>
+
+                    <form id="form_capture_pass-code">
+                        <div id="input_capture_pass-code"></div>
+
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div class="weavr-response">
+                        <div>Response</div>
+                        <textarea id="response_capture_pass-code" readonly rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="weavr-component_token">
+
+                <div id="component_capture_card-pin" class="grid grid__request-response">
+                    <h2 class="grid__row">Card Pin UI Component</h2>
+
+                    <form id="form_capture_card-pin">
+                        <div id="input_capture_card-pin"></div>
+
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div class="weavr-response">
+                        <div>Response</div>
+                        <textarea id="response_capture_card-pin" readonly rows="5"></textarea>
+                    </div>
+                </div>
+                <!-- Display -->
+                <div id="component_display_card-number" class="component_display grid grid__request-response">
+                    <h2 class="grid__row">Display Card Number Component</h2>
+
+                    <!--
+                    Todo: Check for valid base64 data:
+                        regex [A-Za-z0-9+/=]
+                        ends with decoded ==
+                    -->
+                    <form id="form_display_card-number">
+                        <input id="input_display_card-number" name="card-number" type="text" />
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div class="weavr-response">
+                        <div>Response</div>
+                        <div id="response_display_card-number"> -</div>
+                    </div>
+                </div>
+
+                <div id="component_display_cvv" class="component_display grid grid__request-response">
+                    <h2 class="grid__row">CVV UI Component</h2>
+
+                    <form id="form_display_cvv">
+                        <input id="input_display_cvv" name="cvv" type="text" />
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div class="weavr-response">
+                        <div>Response</div>
+                        <div id="response_display_cvv"> -</div>
+                    </div>
+                </div>
+
+                <div id="component_display_card-pin" class="component_display grid grid__request-response">
+                    <h2 class="grid__row">Show Card Pin UI Component</h2>
+
+                    <form id="form_display_card-pin">
+                        <input id="input_display_card-pin" name="cvv" type="text" />
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div class="weavr-response">
+                        <div>Response</div>
+                        <div id="response_display_card-pin"> -</div>
+                    </div>
+                </div>
+
+                <!-- Verify -->
+                <div id="component_capture_beneficiary-kyc" class="grid grid__label-value">
+                    <h2 class="grid__row">Director KYC UI component</h2>
+
+                    <form class="weavr-options grid" id="form_capture_beneficiary-kyc_options">
+                        <input type="text" id="option_capture_beneficiary-kyc_ref" placeholder="Reference Id">
+                        <input type="text" id="option_capture_beneficiary-kyc_lang" placeholder="Language (en)">
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div id="input_capture_beneficiary-kyc"></div>
+                </div>
+
+                <div id="component_capture_consumer-kyc" class="grid grid__label-value">
+                    <h2 class="grid__row">KYC UI Component</h2>
+
+                    <form class="weavr-options grid" id="form_capture_consumer-kyc_options" onsubmit="return false;">
+                        <input type="text" id="option_capture_consumer-kyc_ref" placeholder="Reference Id">
+                        <input type="text" id="option_capture_consumer-kyc_lang" placeholder="Language (en)">
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div id="input_capture_consumer-kyc"></div>
+                </div>
+
+
+                <div id="component_capture_corporate-kyb" class="grid grid__label-value">
+                    <h2 class="grid__row">Corporate KYB UI Component</h2>
+
+                    <form class="weavr-options grid" id="form_capture_corporate-kyb_options" onsubmit="return false;">
+                        <input type="text" id="option_capture_corporate-kyb_ref" placeholder="Reference Id">
+                        <input type="text" id="option_capture_corporate-kyb_lang" placeholder="Language (en)">
+                        <input type="submit" value="Submit" />
+                    </form>
+
+                    <div id="input_capture_corporate-kyb"></div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-3">
+        <div class="d-flex justify-content-center">
+            <a href="./playground.html" class="">Go to Playground</a>
+        </div>
+    </div>
+
+</div>
+
+<script src="prism/prism.js"></script>
+<script src="./env.js"></script>
+<script src="./constants.js"></script>
+<script src="./initialise.js"></script>
+
+<script src="components/capturePasswordComponent.js"></script>
+<script src="components/capturePassCodeComponent.js"></script>
+<script src="components/captureCardPinComponent.js"></script>
+<script src="components/displayCardNumberComponent.js"></script>
+<script src="components/displayCvvComponent.js"></script>
+<script src="components/displayCardPinComponent.js"></script>
+<script src="components/captureBeneficiaryKyc.js"></script>
+<script src="components/captureConsumerKyc.js"></script>
+<script src="components/captureCorporateKyb.js"></script>
+
+<script src="./sample.js"></script>
+
+<script>
+    // Language Selection
+    const currentValue = localStorage.getItem('language') || 'example-vanilla';
+    const radios = document.querySelectorAll('input[name="language"][type="radio"]');
+    const options = [];
+
+    function update(value) {
+        options.forEach(option => {
+            const elements = document.querySelectorAll('.' + option)
+            elements.forEach(element => element.hidden = true)
+        })
+
+        const elements = document.querySelectorAll('.' + value)
+        elements.forEach(element => element.hidden = false)
+    }
+
+    radios.forEach(radio => {
+        options.push(radio.value)
+        radio.addEventListener('click', function () {
+            let value = radio.value
+            update(value)
+            localStorage.setItem('language', value)
+        })
+
+        radio.checked = currentValue === radio.value
+    })
+
+    update(currentValue)
+</script>
+</body>
+</html>

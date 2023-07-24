@@ -1,0 +1,10 @@
+title: "Weavr UX Components"
+params:
+    cdn:
+        # See https://www.srihash.org for info on how to generate the hashes
+        client_entry: "dist/weavr-client-v2.js"
+        client_entry_hash: "sha384-lN5hwo9BZyVEThcmPj/SAqZsDFBMQIR94g3V+HMaoT169WQpqWwlp6B5zql54xk5"
+        server_entry: "dist/weavr-server-v2.js"
+        server_entry_hash: "sha384-Oxk6ekKJABxfiQVGMcPEIzsdTAm64lmiFJ/56SIN3Jz6/R2UdaUo0zG/gTWF8ATz"
+        server_html: "dist/weavr-server-v2.html"
+        server_html_hash: "sha384-J3lk6bjLMnVqLPVM2OyLN2MhtAgkC1qRtuLdTrKsvuifhf0dmkzeZMGx5I8N8ysp"

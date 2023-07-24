@@ -1,0 +1,246 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.5rem;
+}
+
+
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.container .documentation {
+    flex: 1 1 auto;
+    background-color: #f1f1f1;
+    overflow-y: auto;
+
+}
+
+.section_main {
+    padding: 24px;
+    border-radius: 4px;
+    background: #7f7f7f11;
+    margin-bottom: 24px;
+}
+
+.documentation__tip {
+    border-radius: 4px;
+    background-color: #ffffff;
+    padding: 12px;
+}
+
+.documentation__tip_header {
+    font-weight: bold;
+    font-size: .8rem;
+}
+
+.container .testing {
+    max-width: 800px;
+    min-width: 500px;
+    flex: 1 1 auto;
+    overflow-y: auto;
+}
+
+.grid {
+    display: grid;
+    grid-auto-rows: minmax(min-content, max-content);
+    grid-gap: 0.4rem;
+}
+
+.grid__label-value {
+    grid-template-columns: minmax(120px, auto) 1fr;
+    grid-gap: 0.4rem;
+}
+
+.grid__request-response {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+}
+
+.grid__row {
+    grid-column: 1 / -1;
+}
+
+.mb-1 {
+    margin-bottom: 1rem;
+}
+
+.my-3 {
+    margin: 3rem 0;
+}
+
+.ml-2 {
+    margin-left: 2rem;
+}
+
+.mr-2 {
+    margin-right: 2rem;
+}
+
+.p-none{
+    padding: 0 !important;
+}
+
+.p-1 {
+    padding: 1rem;
+}
+.p-2 {
+    padding: 2rem;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.weavr-component_no-token, .weavr-component_token {
+    display: none;
+    padding: 24px 0;
+    grid-gap: 24px;
+}
+.weavr-response {
+    display: flex;
+    flex-direction: column;
+}
+textarea {
+    resize: vertical;
+}
+
+.component_display form {
+    display: flex;
+    flex-direction: row;
+    height: 38px;
+}
+.component_display form input[type='text'] {
+    flex: 1 1 auto;
+    margin-right: 12px;
+}
+
+.code {
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 8px;
+    white-space: pre-line;
+}
+
+code:not(.code-block) {
+    background-color: lightgray;
+    border-radius: 2px;
+    padding: 2px;
+}
+
+.code-block {
+    position: relative;
+}
+.code-block pre[class*="language-"] {
+    padding-top: 32px;
+}
+.code-block:after {
+    content: "Code";
+    position: absolute;
+    width: auto;
+    min-width: 40px;
+    text-align: center;
+    top: 4px;
+    right: 4px;
+    padding: 2px 4px;
+    background: #00000033;
+}
+
+.code-block.language-js:after {
+    content: "JS";
+}
+.code-block.language-html:after {
+    content: "HTML";
+}
+.code-block.language-react-native:after {
+    content: "React Native";
+}
+
+.code-block.language-react:after {
+    content: "React";
+}
+
+.code-block.language-angular:after {
+    content: "Angular";
+}
+.code-block.language-angular-html:after {
+    content: "Angular HTML";
+}
+.code-block.language-angular-script:after {
+    content: "Angular TS";
+}
+
+.code-block.language-flutter-pubspec:after {
+    content: "Flutter pubspec.yaml";
+}
+
+.code-block.language-dart:after {
+    content: "Dart";
+}
+
+.code-block .code-toolbar .toolbar {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+}
+
+.text-muted {
+    color: gray;
+    font-size: 0.8rem;
+}
+
+/* Used in code */
+.text-success {
+    color: green;
+    font-size: 0.8rem;
+}
+.text-error {
+    color: red;
+    font-size: 0.8rem;
+}
+/* End used in code */
+
+
+/* Display classes */
+
+.d-flex {
+    display: flex;
+}
+
+/* End Display classes */
+
+
+.bordered{
+    border: 1px solid gray
+}
+
+
+/* Flexbox Utilities */
+.justify-space-between{
+    justify-content: space-between;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+.align-items-center{
+    align-items: center;
+}
+
+.flex-1{
+    flex: 1;
+}
+
+.test-class-name-1 {
+    background-color: purple !important;
+    padding: 10px !important;
+}
+
+.test-class-name-2 {
+    border: olivedrab solid 3px !important;
+}
+
+

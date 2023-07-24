@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <title>Secure Components States - Weavr</title>
+    <!-- For QA testing use the following script -->
+    <!--    <script src='https://js.weavr.io/qa/weavr-client-v2.js' crossorigin='anonymous' charset='utf-8'></script>-->
+
+    <!-- For local Build testing use the following script -->
+<!--        <script src='http://localhost:8080/weavr-client-v2.js' crossorigin='anonymous' charset='utf-8'></script>-->
+
+    <!-- For local development use the following script -->
+        <script
+            src='http://localhost:8080/client/client.ts'
+            type='module'
+            crossorigin='anonymous'
+            charset='utf-8'>
+        </script>
+
+    <link rel='stylesheet' href='./style/style.css'>
+</head>
+<body>
+<main class='p-2'>
+    <section>
+        <h1>UI Library States</h1>
+        <form id='ui-form' class='grid grid__label-value mb-1'>
+            <label>API Key</label>
+            <input type='text' id='input-api-key' />
+            <label>UI Key</label>
+            <input type='text' id='input-ui-key' />
+
+            <div class='grid__row'>
+                <input id='init-btn' type='submit' value='Start initialise'>
+            </div>
+        </form>
+        <form id='init-form' class='grid grid__label-value mb-1'>
+            <label>Username</label>
+            <input type='text' id='input-username' />
+
+            <label>Password</label>
+
+            <div id='input_password'>Initialise for password component</div>
+
+            <label>Current Auth Key</label>
+            <textarea id='input-auth-key' rows='12' readonly></textarea>
+
+            <div class='grid__row text-center'>
+                <h3 id='init-message'></h3>
+            </div>
+
+            <label class='text-muted grid__row'>
+                Either the Username + Password or the Auth key need to be set in order to initialise<br />
+                Requests are made to the sandbox environment on<br /><code>https://js.weavr.io/qa/weavr-client-v2.js</code>
+            </label>
+
+            <div class='grid__row'>
+                <input type='submit' value='Login'>
+            </div>
+        </form>
+    </section>
+    <hr>
+    <section>
+        <div id='weavr-components-not-initalised'>
+            <p class='text-center my-3'>
+                Initialise to view all components
+            </p>
+        </div>
+        <section id='weavr-components-initalised' style='display: none' class='my-3'>
+            <section id='component_states'>
+                <h4>
+                    Secure Input Components
+                </h4>
+                <div class='d-flex'>
+                    <div>
+                        <p>Text Input for Updating or Overriding Password Options:</p>
+                        <textarea name='rerender-options-input'
+                            id='rerender-options-input'
+                            cols='30'
+                            rows='10'></textarea>
+                        <button onclick="updateCapturePasswordExample(document.getElementById('rerender-options-input').value)">Update</button>
+                        <button onclick="overrideCapturePasswordExample(document.getElementById('rerender-options-input').value)">Override</button>
+                    </div>
+                    <div>
+                        <p>Example Options:</p>
+                        <pre>
+                            {
+                                placeholder: 'UPDATED',
+                                style: {
+                                    base: {
+                                        backgroundColor: 'red',
+                                            ':hover': {
+                                            '::placeholder': {
+                                                color: 'green'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            </pre>
+                    </div>
+                </div>
+                <p>
+                    <label for='disabled-state-toggle'>
+                        Toggle Disabled State
+                    </label>
+                    <input id='disabled-state-toggle' type='checkbox'>
+                </p>
+
+                <div class='weavr-component_no-token'>
+                    <div class='grid grid__label-value '>
+                        <p class='mr-2'><em>Capture Password:</em></p>
+                        <span class='d-flex align-items-center bordered'>
+                            <div id='input_capture_password-example' class='flex-1'></div>
+                        </span>
+                    </div>
+                    <div class='grid grid__label-value '>
+                        <p class='mr-2'><em>Capture Passcode:</em></p>
+                        <span class='d-flex align-items-center bordered'>
+                            <div id='input_capture_passcode-example' class='flex-1'></div>
+
+                        </span>
+                    </div>
+                    <div class="grid grid__label-value ">
+                        <p class="mr-2"><em>Capture Segmented Digit Passcode:</em></p>
+                        <span class="d-flex align-items-center" style="width: 200px">
+                            <div id="input_capture_segmented-passcode-example" class="flex-1"></div>
+
+                        </span>
+                    </div>
+                </div>
+                <section>
+                    <p class='weavr-component_no-token-msg text-center my-3'>
+                        Login to view all other display components
+                    </p>
+                    <div class='weavr-component_token p-none'>
+                        <div class='grid grid__label-value'>
+                            <p class='mr-2'><em>Capture Card Pin:</em></p>
+                            <span class='d-flex align-items-center bordered'>
+                                <div id='input_capture_card_pin-example' class='flex-1'></div>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+            </section>
+            <hr class='my-3'>
+            <section>
+                <h4>
+                    Secure Span Components
+                </h4>
+                <div class='weavr-component_no-token-msg p-none'>
+                    <p class='text-center my-3'>
+                        Login to view all secure span components
+                    </p>
+                </div>
+                <div class='d-flex'>
+                    <div>
+                        <p>Text Input for Updating or Overriding CVV Options:</p>
+                        <textarea name='rerender-options-input'
+                            id='rerender-options-display'
+                            cols='30'
+                            rows='10'></textarea>
+                        <button onclick="updateDisplayCvvExample(document.getElementById('rerender-options-display').value)">Update</button>
+                        <button onclick="overrideDisplayCvvExample(document.getElementById('rerender-options-display').value)">Override</button>
+                    </div>
+                    <div>
+                        <p>Example Options:</p>
+                        <pre>
+                            {
+                                placeholder: 'UPDATED',
+                                style: {
+                                    color: 'purple',
+                                        ':hover': {
+                                            color: 'brown'
+                                    }
+                                }
+                            }
+                            </pre>
+                    </div>
+                </div>
+                <div class='weavr-component_token p-none'>
+                    <div class='grid grid__label-value'>
+                        <p class='mr-2'><em>Span Card Pin:</em></p>
+                        <span class='d-flex align-items-center'>
+                            <span id='display_card_pin-example' class='flex-1'></span>
+                        </span>
+                    </div>
+                </div>
+                <div class='weavr-component_token p-none'>
+                    <div class='grid grid__label-value'>
+                        <p class='mr-2'><em>Span CVV:</em></p>
+                        <span class='d-flex align-items-center'>
+                            <span id='display_cvv-example' class='flex-1'></span>
+                        </span>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </section>
+
+    <hr class='my-3'>
+    <section>
+
+        <div class='d-flex justify-content-center'>
+            <a href='./index.html' class=''>Back Home</a>
+        </div>
+    </section>
+</main>
+
+
+<script src='./env.js'></script>
+<script src='./constants.js'></script>
+<script src='./initialise.js'></script>
+<script src='components/playground/secureInputComponents.js'></script>
+<script src='components/playground/secureDisplayComponents.js'></script>
+<script src='assets/scripts/playground/initialise.js'></script>
+<script src='assets/scripts/playground/playground.js'></script>
+
+</body>
+</html>
