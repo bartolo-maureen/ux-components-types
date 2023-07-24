@@ -1,6 +1,6 @@
 {
   "name": "ux-components-types",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.0",
   "types": "index.d.ts",
   "workspaces": [
     "packages/*"

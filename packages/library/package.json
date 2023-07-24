@@ -1,47 +1,47 @@
 {
-    "name" : "opc-support-appgateway-js",
-    "version" : "2.0.0a0",
-    "description" : "A secure component library built to consume Weavr Multi APIs in a secure manner",
-    "keywords" : [
+    "name": "opc-support-appgateway-js",
+    "version": "1.0.0-alpha.0",
+    "description": "A secure component library built to consume Weavr Multi APIs in a secure manner",
+    "keywords": [
         "opc",
         "weavr",
         "secure",
         "library",
         "javascript"
     ],
-    "type" : "module",
+    "type": "module",
     "types": "fe-ux-components-v2.d.ts",
-    "module" : "es2020",
-    "dependencies" : {
-        "class-validator" : "^0.14.0",
-        "events" : "^3.2.0"
+    "module": "es2020",
+    "dependencies": {
+        "class-validator": "^0.14.0",
+        "events": "^3.2.0"
     },
-    "engines" : {
-        "node" : "^18.16.0"
+    "engines": {
+        "node": "^18.16.0"
     },
-    "engineStrict" : true,
-    "devDependencies" : {
-        "@types/lodash-es" : "^4.17.7",
-        "@web/rollup-plugin-html" : "^2.0.0",
-        "axios" : "^1.4.0",
-        "eslint" : "^8.39.0",
-        "ip-range-check" : "^0.2.0",
-        "lodash-es" : "^4.17.21",
-        "pathe" : "^1.1.0",
-        "prettier" : "^2.8.8",
-        "rollup-plugin-delete" : "^2.0.0",
-        "rollup-plugin-visualizer" : "^5.9.0",
-        "ts-node" : "^10.9.1",
-        "typescript" : "^4.9.3",
-        "vite" : "^4.3.3",
-        "vite-plugin-html-minifier" : "^1.0.3"
+    "engineStrict": true,
+    "devDependencies": {
+        "@types/lodash-es": "^4.17.7",
+        "@web/rollup-plugin-html": "^2.0.0",
+        "axios": "^1.4.0",
+        "eslint": "^8.39.0",
+        "ip-range-check": "^0.2.0",
+        "lodash-es": "^4.17.21",
+        "pathe": "^1.1.0",
+        "prettier": "^2.8.8",
+        "rollup-plugin-delete": "^2.0.0",
+        "rollup-plugin-visualizer": "^5.9.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.3",
+        "vite": "^4.3.3",
+        "vite-plugin-html-minifier": "^1.0.3"
     },
-    "scripts" : {
-        "dev" : "vite",
-        "dev:host" : "vite --host",
-        "build" : "tsc && ts-node build/build.ts",
-        "preview" : "vite preview",
-        "release" : "npm run build && npm run release:sri",
-        "release:sri" : "ts-node build/generate-sri.ts"
+    "scripts": {
+        "dev": "vite",
+        "dev:host": "vite --host",
+        "build": "tsc && ts-node build/build.ts",
+        "preview": "vite preview",
+        "release": "npm run build && npm run release:sri",
+        "release:sri": "ts-node build/generate-sri.ts"
     }
 }
